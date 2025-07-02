@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simulation Crédit</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to right, #e0eafc, #cfdef3);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      h1 {
+        color: #333;
+        margin-bottom: 30px;
+      }
+
+      form {
+        background-color: white;
+        padding: 30px 40px;
+        border-radius: 15px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+      }
+
+      button {
+        width: 100%;
+        background-color: #4caf50;
+        color: white;
+        padding: 14px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      h2 {
+        margin-top: 20px;
+        color: #2c3e50;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simulation de votre crédit</h1>
+
+    <form action="{{ url_for('predict') }}" method="post">
+      <input
+        type="text"
+        name="Credit_History"
+        placeholder="Historique de crédit (0 ou 1)"
+        required
+      />
+      <input
+        type="text"
+        name="Married"
+        placeholder="Marié ? (0 = Non, 1 = Oui)"
+        required
+      />
+      <input
+        type="text"
+        name="CoapplicantIncome"
+        placeholder="Revenu du coemprunteur"
+        required
+      />
+      <button type="submit">Simuler</button>
+    </form>
+
+    {% if prediction_text %}
+    <h2>{{ prediction_text }}</h2>
+    {% endif %}
+  </body>
+</html>
